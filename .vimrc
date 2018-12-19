@@ -4,7 +4,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'honza/vim-snippets'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-sensible'
-  Plug 'morhetz/gruvbox'
+"  Plug 'morhetz/gruvbox'
+  Plug 'joshdick/onedark.vim'
   Plug 'bling/vim-airline'
 call plug#end()
 "Plug 'Valloric/YouCompleteMe'
@@ -14,4 +15,5 @@ set shiftwidth=2
 set expandtab
 set background=dark
 set termguicolors
-colorscheme gruvbox
+"colorscheme gruvbox
+colorscheme onedark
