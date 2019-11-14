@@ -1,9 +1,13 @@
+# zplug 
 source ~/.zplug/init.zsh
 zplug "robbyrussell/oh-my-zsh", use:"lib/*.zsh"
 zplug "plugins/git", from:oh-my-zsh
-zplug "denysdovhan/spaceship-prompt", as:theme
+zplug "plugins/knife", from:oh-my-zsh
+zplug "plugins/docker", from:oh-my-zsh
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+zplug "romkatv/powerlevel10k", as:theme, depth:1 
 
 if ! zplug check --verbose; then
   printf "install? [y/n]: "
@@ -13,31 +17,37 @@ if ! zplug check --verbose; then
 fi
 zplug load 
 
-spaceship_vi_mode_enable
-SPACESHIP_TIME_SHOW=true
-SPACESHIP_PROMPT_ORDER=(
-  time          # Time stamps section
-  user          # Username section
-  dir           # Current directory section
-  host          # Hostname section
-  git           # Git section (git_branch + git_status)
-  ruby          # Ruby section
-  golang        # Go section
-  docker        # Docker section
-  aws           # Amazon Web Services section
-  line_sep      # Line break
-  vi_mode       # Vi-mode indicator
-  exit_code     # Exit code section
-  char          # Prompt character
-)
-
-bindkey '^R' history-incremental-search-backward
-alias config='/usr/bin/git --git-dir=/home/xiang/.cfg/ --work-tree=/home/xiang'
-alias tf='terraform'
-
-if [ -n "$DESKTOP_SESSION" ];then
-    eval $(gnome-keyring-daemon --start)
-    export SSH_AUTH_SOCK
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# shell settings and aliases
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias tf='terraform'
+alias l='colorls --group-directories-first --almost-all'
+alias ll='colorls --group-directories-first --almost-all --long' # detailed list view
+set -o vi
+source ~/.m2x-env
+export EDITOR=vi
+bindkey '^R' history-incremental-search-backward
 
+# PATH
+export PATH="~/work/att/att-iot-ops-cli/bin:/usr/local/opt/findutils/libexec/gnubin:$PATH"
+export PATH=/usr/local/aws/bin:$PATH
+if [ -f '/Users/sfortner/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/sfortner/google-cloud-sdk/path.zsh.inc'; fi
+
+# tools
+source $HOME/.asdf/asdf.sh
+
+# autocompletions
+source /usr/local/aws/bin/aws_zsh_completer.sh
+source /usr/local/etc/bash_completion.d/az
+source $HOME/.asdf/completions/asdf.bash
+source <(kubectl completion zsh)
+if [ -f '/Users/sfortner/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/sfortner/google-cloud-sdk/completion.zsh.inc'; fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
