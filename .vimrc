@@ -5,6 +5,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'ingydotnet/yaml-vim'
   Plug 'joshdick/onedark.vim'
   Plug 'scrooloose/syntastic'
+  Plug 'sheerun/vim-polyglot'
   Plug 'towolf/vim-helm'
   Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-surround'
