@@ -13,12 +13,17 @@ call plug#begin('~/.vim/plugged')
   
 call plug#end()
 
+set expandtab
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
-set expandtab
-set background=dark
+
+set number cursorline
+
 set termguicolors
-set number
+set background=dark
 colorscheme onedark   
 let g:airline_theme = 'onedark'
+
+nnoremap j gj
+nnoremap k gk
