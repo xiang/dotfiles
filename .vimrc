@@ -1,19 +1,17 @@
 call plug#begin('~/.vim/plugged')
-  Plug 'scrooloose/syntastic'
   Plug 'fatih/vim-go'
-  Plug 'honza/vim-snippets'
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-sensible'
-"  Plug 'morhetz/gruvbox'
-  Plug 'joshdick/onedark.vim'
-  Plug 'bling/vim-airline'
-  Plug 'ingydotnet/yaml-vim'
-  Plug 'towolf/vim-helm'
   Plug 'hashivim/vim-terraform'
+  Plug 'honza/vim-snippets'
+  Plug 'ingydotnet/yaml-vim'
+  Plug 'joshdick/onedark.vim'
+  Plug 'scrooloose/syntastic'
+  Plug 'towolf/vim-helm'
+  Plug 'tpope/vim-sensible'
+  Plug 'tpope/vim-surround'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
   
 call plug#end()
-"Plug 'Valloric/YouCompleteMe'
-"Plug 'altercation/vim-colors-solarized'
 
 set shiftwidth=2
 set softtabstop=2
@@ -21,5 +19,6 @@ set tabstop=2
 set expandtab
 set background=dark
 set termguicolors
-"colorscheme gruvbox
-colorscheme onedark
+set number
+colorscheme onedark   
+let g:airline_theme = 'onedark'
